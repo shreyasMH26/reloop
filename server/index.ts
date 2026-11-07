@@ -108,11 +108,11 @@ app.use('/api', (req, res) => {
 const DIST_PATH = path.resolve(process.cwd(), 'dist');
 if (fs.existsSync(DIST_PATH)) {
   app.use(express.static(DIST_PATH));
-  app.get('*', (req, res, next) => {
-    if (req.originalUrl.startsWith('/api') || req.originalUrl.startsWith('/ws')) {
-      return next();
+  app.use((req, res, next) => {
+    if (req.method === 'GET' && !req.originalUrl.startsWith('/api') && !req.originalUrl.startsWith('/ws')) {
+      return res.sendFile(path.join(DIST_PATH, 'index.html'));
     }
-    res.sendFile(path.join(DIST_PATH, 'index.html'));
+    next();
   });
 }
 
