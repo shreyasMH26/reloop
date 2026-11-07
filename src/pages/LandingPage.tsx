@@ -15,14 +15,11 @@ import {
   Users, 
   Compass,
   Star,
-  Shirt,
   Search
 } from 'lucide-react';
 import { Layout } from '../components/layout/Layout';
 import { Button } from '../components/ui/Button';
 import { ProductCard } from '../components/marketplace/ProductCard';
-import { ClothingRailHero } from '../components/ui/product-rail-gallery';
-import { RAIL_DEMO_ITEMS } from '../components/ui/product-rail-gallery-demo';
 import { DoodleCrewFooter } from '../components/ui/doodle-crew-footer-sunny';
 import { CATEGORIES, DAVANAGERE_AREAS } from '../lib/utils';
 import { api } from '../services/api';
@@ -201,43 +198,6 @@ export const LandingPage: React.FC = () => {
             </div>
 
           </div>
-        </div>
-      </section>
-
-      {/* ─── Integrated Interactive Gear Rail Gallery ──────────────────────────── */}
-      <section className="py-14 sm:py-20 bg-cream-100 border-b border-cream-200 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sage-700 mb-1">
-                <Shirt className="w-4 h-4" />
-                <span>Interactive Rail Experience</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-charcoal-900 tracking-tight">
-                Inspect Pre-Loved Clothing & Gear in 3D
-              </h2>
-              <p className="text-sm text-charcoal-600 mt-1 max-w-xl">
-                Slide across the rail, rotate garments 360°, inspect details front and back, and discover sustainable fashion on campus.
-              </p>
-            </div>
-            <Link to="/explore?category=clothing">
-              <Button variant="outline" size="sm" className="bg-white">
-                View All Wardrobe Pieces <ArrowRight className="w-3.5 h-3.5 ml-1" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-
-        {/* 3D Rail Gallery */}
-        <div className="w-full">
-          <ClothingRailHero
-            items={RAIL_DEMO_ITEMS}
-            hanger="none"
-            eyebrow="Curated Campus Thrift · 10 Pieces on the Rail"
-            heading="Handle before you decide."
-            caption="Slide a hanger, flip to see the back, or inspect full specifications."
-            autoplay={true}
-          />
         </div>
       </section>
 
