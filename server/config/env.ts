@@ -23,8 +23,12 @@ if (!parsed.success) {
 
 export const env = parsed.data;
 
-// In production, DATABASE_URL is strictly mandatory!
+// In production, DATABASE_URL is required unless running in preview demo mode
 if (env.NODE_ENV === 'production' && (!env.DATABASE_URL || env.DATABASE_URL.trim() === '')) {
-  console.error('🚨 [ReLoop FATAL] DATABASE_URL is mandatory when running in production mode! Embedded JSON store is strictly disabled in production.');
-  process.exit(1);
+  if (process.env.ALLOW_DEMO_STORE === 'true') {
+    console.warn('⚠️ [ReLoop Warning] Running in production with ALLOW_DEMO_STORE=true. Using fallback store.');
+  } else {
+    console.error('🚨 [ReLoop FATAL] DATABASE_URL is mandatory when running in production mode! Set DATABASE_URL or set ALLOW_DEMO_STORE=true for demo instances.');
+    process.exit(1);
+  }
 }

@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import path from 'path';
+import fs from 'fs';
 import { initDatabase, closeDatabase } from './db';
 import { initWebSocketServer } from './websocket';
 import { apiLimiter } from './middleware/rateLimit';
@@ -102,6 +103,18 @@ app.get('/api/health', (req, res) => {
 app.use('/api', (req, res) => {
   res.status(404).json({ error: `Endpoint ${req.originalUrl} not found` });
 });
+
+// Serve frontend build in production
+const DIST_PATH = path.resolve(process.cwd(), 'dist');
+if (fs.existsSync(DIST_PATH)) {
+  app.use(express.static(DIST_PATH));
+  app.get('*', (req, res, next) => {
+    if (req.originalUrl.startsWith('/api') || req.originalUrl.startsWith('/ws')) {
+      return next();
+    }
+    res.sendFile(path.join(DIST_PATH, 'index.html'));
+  });
+}
 
 // Global Error Handler
 app.use(errorHandler);
