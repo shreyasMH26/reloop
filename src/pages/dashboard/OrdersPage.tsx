@@ -3,7 +3,8 @@ import {
   CheckCircle2, 
   Receipt,
   Package,
-  Star
+  Star,
+  QrCode
 } from 'lucide-react';
 import { DashboardLayout } from '../../components/layout/DashboardLayout';
 import { Badge } from '../../components/ui/Badge';
@@ -12,6 +13,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { formatPrice } from '../../lib/utils';
 import { api } from '../../services/api';
 import { ReviewModal } from '../../components/reviews/ReviewModal';
+import { UPIPaymentModal } from '../../components/payments/UPIPaymentModal';
 
 export const OrdersPage: React.FC = () => {
   const { user } = useAuth();
@@ -25,6 +27,7 @@ export const OrdersPage: React.FC = () => {
 
   // Review modal state
   const [reviewOrder, setReviewOrder] = useState<any | null>(null);
+  const [paymentOrder, setPaymentOrder] = useState<any | null>(null);
 
   const loadOrders = async () => {
     try {
@@ -115,6 +118,14 @@ export const OrdersPage: React.FC = () => {
                     </div>
 
                     <div className="flex items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        icon={<QrCode className="w-3.5 h-3.5 text-sage-600" />}
+                        onClick={() => setPaymentOrder(ord)}
+                      >
+                        UPI QR
+                      </Button>
                       <Badge variant="green" size="sm">
                         <CheckCircle2 className="w-3 h-3 mr-1 inline" /> Handover Complete
                       </Badge>
@@ -175,6 +186,24 @@ export const OrdersPage: React.FC = () => {
             }
             itemTitle={reviewOrder.product?.title || 'Marketplace Item'}
             onSuccess={loadOrders}
+          />
+        )}
+
+        {/* UPI Payment Modal */}
+        {paymentOrder && (
+          <UPIPaymentModal
+            isOpen={Boolean(paymentOrder)}
+            onClose={() => setPaymentOrder(null)}
+            orderId={paymentOrder.id}
+            itemTitle={paymentOrder.product?.title || 'Marketplace Item'}
+            amount={paymentOrder.amount}
+            sellerName={
+              paymentOrder.buyer_id === user?.id
+                ? paymentOrder.seller?.full_name || 'Seller'
+                : paymentOrder.buyer?.full_name || 'Buyer'
+            }
+            sellerId={paymentOrder.seller_id}
+            onPaymentConfirmed={loadOrders}
           />
         )}
 

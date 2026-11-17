@@ -9,7 +9,8 @@ import {
   User, 
   AlertCircle,
   Inbox,
-  Send
+  Send,
+  QrCode
 } from 'lucide-react';
 import { DashboardLayout } from '../../components/layout/DashboardLayout';
 import { Button } from '../../components/ui/Button';
@@ -18,6 +19,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useToast } from '../../components/ui/Toast';
 import { formatPrice } from '../../lib/utils';
 import { api } from '../../services/api';
+import { UPIPaymentModal } from '../../components/payments/UPIPaymentModal';
 
 export const RequestsPage: React.FC = () => {
   const { user } = useAuth();
@@ -26,6 +28,7 @@ export const RequestsPage: React.FC = () => {
   const [incoming, setIncoming] = useState<any[]>([]);
   const [outgoing, setOutgoing] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [paymentReq, setPaymentReq] = useState<any | null>(null);
 
   async function loadRequests() {
     setLoading(true);
@@ -202,7 +205,15 @@ export const RequestsPage: React.FC = () => {
                 )}
 
                 {activeTab === 'incoming' && req.status === 'accepted' && (
-                  <div className="flex justify-end pt-1">
+                  <div className="flex justify-end gap-2 pt-1">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setPaymentReq(req)}
+                      icon={<QrCode className="w-3.5 h-3.5 text-sage-600" />}
+                    >
+                      Receive UPI QR
+                    </Button>
                     <Button 
                       variant="secondary" 
                       size="sm" 
@@ -215,6 +226,19 @@ export const RequestsPage: React.FC = () => {
                 )}
 
                 {/* Actions for Buyer (Outgoing) */}
+                {activeTab === 'outgoing' && req.status === 'accepted' && (
+                  <div className="flex justify-end gap-2 pt-1">
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={() => setPaymentReq(req)}
+                      icon={<QrCode className="w-3.5 h-3.5" />}
+                    >
+                      Pay via UPI QR
+                    </Button>
+                  </div>
+                )}
+
                 {activeTab === 'outgoing' && req.status === 'pending' && (
                   <div className="flex justify-end pt-1">
                     <Button 
@@ -242,6 +266,29 @@ export const RequestsPage: React.FC = () => {
                 : 'Browse the marketplace and submit purchase, rental, or exchange requests on pre-owned items.'}
             </p>
           </div>
+        )}
+
+        {/* UPI Payment Modal */}
+        {paymentReq && (
+          <UPIPaymentModal
+            isOpen={Boolean(paymentReq)}
+            onClose={() => setPaymentReq(null)}
+            orderId={paymentReq.id}
+            itemTitle={paymentReq.product?.title || 'Community Item'}
+            amount={paymentReq.offered_price || paymentReq.product?.price || 0}
+            sellerName={
+              activeTab === 'incoming'
+                ? paymentReq.buyer?.full_name || 'Buyer'
+                : paymentReq.product?.seller?.full_name || 'Seller'
+            }
+            sellerId={paymentReq.product?.seller_id}
+            onPaymentConfirmed={() => {
+              if (activeTab === 'incoming') {
+                handleUpdateStatus(paymentReq.id, 'completed');
+              }
+              loadRequests();
+            }}
+          />
         )}
 
       </div>

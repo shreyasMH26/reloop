@@ -194,6 +194,26 @@
       "bio": "",
       "location": "Davanagere, Karnataka",
       "avatar_url": "https://images.unsplash.com/photo-1534528742189?w=150&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "usr-xyp4k4o",
+      "rating": 5,
+      "total_ratings": 0,
+      "total_listings": 1,
+      "total_transactions": 0,
+      "role": "user",
+      "is_verified": false,
+      "is_suspended": false,
+      "created_at": "2026-11-17T04:01:38.101Z",
+      "updated_at": "2026-11-17T04:01:38.101Z",
+      "email": "student_1794888098033@biet.edu",
+      "password_hash": "$2b$10$QVbDKfWKQ0/5L7J4tH90luvsbjC.M3obxweKSORTxPzrF8dVMkWgO",
+      "full_name": "Rohit Kulkarni",
+      "area": "BIET Campus",
+      "phone": "+91 99000 11222",
+      "bio": "",
+      "location": "Davanagere, Karnataka",
+      "avatar_url": "https://images.unsplash.com/photo-1534528741800?w=150&auto=format&fit=crop&q=80"
     }
   ],
   "categories": [
@@ -253,6 +273,27 @@
     }
   ],
   "products": [
+    {
+      "id": "prod-nhnwdra",
+      "status": "flagged",
+      "views": 1,
+      "expires_at": "2027-02-15T04:01:38.214Z",
+      "created_at": "2026-11-17T04:01:38.214Z",
+      "updated_at": "2026-11-17T04:01:38.382Z",
+      "title": "Sony Alpha A6400 Camera Kit",
+      "description": "Barely used mirrorless camera with 16-50mm power zoom lens. Perfect for college media projects.",
+      "category_id": "cat-electronics",
+      "condition": "like_new",
+      "listing_type": "sell",
+      "price": 32000,
+      "original_price": 65000,
+      "area": "BIET Campus",
+      "images": [
+        "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600"
+      ],
+      "seller_id": "usr-xyp4k4o",
+      "location": "Davanagere, Karnataka"
+    },
     {
       "id": "prod-wpde7bx",
       "status": "flagged",
@@ -568,6 +609,18 @@
   ],
   "purchase_requests": [
     {
+      "id": "req-d6rov4l",
+      "status": "accepted",
+      "created_at": "2026-11-17T04:01:38.269Z",
+      "updated_at": "2026-11-17T04:01:38.271Z",
+      "product_id": "prod-nhnwdra",
+      "buyer_id": "usr-ananya",
+      "seller_id": "usr-xyp4k4o",
+      "request_type": "buy",
+      "offered_price": 30000,
+      "message": "Can I pick it up tomorrow outside BIET Central Library?"
+    },
+    {
       "id": "req-gb3ap5y",
       "status": "accepted",
       "created_at": "2026-11-07T06:36:48.228Z",
@@ -652,6 +705,20 @@
   ],
   "orders": [
     {
+      "id": "ord-n1v0dcj",
+      "product_id": "prod-nhnwdra",
+      "buyer_id": "usr-ananya",
+      "seller_id": "usr-xyp4k4o",
+      "request_id": "req-d6rov4l",
+      "amount": 30000,
+      "status": "pending",
+      "payment_method": "UPI on Handover",
+      "handover_type": "In-person campus meetup",
+      "handover_address": "Agreed Campus Hub",
+      "created_at": "2026-11-17T04:01:38.271Z",
+      "updated_at": "2026-11-17T04:01:38.271Z"
+    },
+    {
       "id": "ord-3g5uau1",
       "product_id": "prod-wpde7bx",
       "buyer_id": "usr-ananya",
@@ -723,6 +790,14 @@
     }
   ],
   "conversations": [
+    {
+      "id": "conv-9y6yiqo",
+      "buyer_id": "usr-ananya",
+      "seller_id": "usr-xyp4k4o",
+      "product_id": "prod-nhnwdra",
+      "last_message_at": "2026-11-17T04:01:38.269Z",
+      "created_at": "2026-11-17T04:01:38.269Z"
+    },
     {
       "id": "conv-tnudwl3",
       "buyer_id": "usr-ananya",
@@ -818,6 +893,15 @@
       "content": "[Purchase Request: ₹30000] Can I pick it up tomorrow outside BIET Central Library?",
       "is_read": false,
       "created_at": "2026-11-07T06:36:48.229Z"
+    },
+    {
+      "id": "msg-ez65ba7",
+      "conversation_id": "conv-9y6yiqo",
+      "sender_id": "usr-ananya",
+      "receiver_id": "usr-xyp4k4o",
+      "content": "[Purchase Request: ₹30000] Can I pick it up tomorrow outside BIET Central Library?",
+      "is_read": false,
+      "created_at": "2026-11-17T04:01:38.269Z"
     }
   ],
   "reports": [],
@@ -834,6 +918,36 @@
     }
   ],
   "notifications": [
+    {
+      "id": "notif-p9vx36s",
+      "is_read": true,
+      "created_at": "2026-11-17T04:01:38.271Z",
+      "user_id": "usr-ananya",
+      "type": "request_accepted",
+      "title": "Offer Accepted",
+      "message": "Your request has been accepted by the seller.",
+      "link": "/dashboard/requests"
+    },
+    {
+      "id": "notif-iru4o16",
+      "is_read": false,
+      "created_at": "2026-11-17T04:01:38.269Z",
+      "user_id": "usr-xyp4k4o",
+      "type": "message_new",
+      "title": "New Message",
+      "message": "[Purchase Request: ₹30000] Can I pick it up tomorr...",
+      "link": "/dashboard/messages"
+    },
+    {
+      "id": "notif-y2m30up",
+      "is_read": false,
+      "created_at": "2026-11-17T04:01:38.269Z",
+      "user_id": "usr-xyp4k4o",
+      "type": "request_new",
+      "title": "New Offer Received",
+      "message": "You received a buy request for an item.",
+      "link": "/dashboard/requests"
+    },
     {
       "id": "notif-nviip5s",
       "is_read": true,
@@ -936,6 +1050,15 @@
     }
   ],
   "moderation_logs": [
+    {
+      "id": "log-bvizen5",
+      "admin_id": "usr-admin",
+      "action": "listing_flagged",
+      "target_type": "product",
+      "target_id": "prod-nhnwdra",
+      "notes": "Routine audit test",
+      "created_at": "2026-11-17T04:01:38.383Z"
+    },
     {
       "id": "log-b7em1n3",
       "admin_id": "usr-admin",

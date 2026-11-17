@@ -4,7 +4,7 @@
  * Automatically injects JWT Bearer tokens and handles auth persistence.
  */
 
-const API_BASE = '/api';
+const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
 export const TOKEN_STORAGE_KEY = 'reloop_auth_token';
 

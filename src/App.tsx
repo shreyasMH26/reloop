@@ -22,9 +22,11 @@ import ProfileSettingsPage from './pages/dashboard/ProfileSettingsPage'
 import AdminDashboardPage from './pages/admin/AdminDashboardPage'
 import NotFoundPage from './pages/NotFoundPage'
 import { ProtectedRoute } from './components/auth/ProtectedRoute'
+import { PWAInstallPrompt } from './components/common/PWAInstallPrompt'
 
 export default function App() {
   return (
+    <>
     <Routes>
       {/* Public Pages */}
       <Route path="/" element={<LandingPage />} />
@@ -154,5 +156,7 @@ export default function App() {
       {/* Fallback 404 */}
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
+    <PWAInstallPrompt />
+    </>
   )
 }

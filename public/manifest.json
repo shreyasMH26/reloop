@@ -1,0 +1,32 @@
+{
+  "name": "ReLoop — Community Circular Marketplace",
+  "short_name": "ReLoop",
+  "description": "Give Things a Second Life. Hyperlocal community marketplace to buy, sell, rent, and exchange pre-owned goods in Davanagere.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fcfbf7",
+  "theme_color": "#3d7f60",
+  "orientation": "portrait-primary",
+  "categories": ["shopping", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "./pwa-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./pwa-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
